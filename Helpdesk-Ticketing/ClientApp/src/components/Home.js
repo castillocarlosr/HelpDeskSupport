@@ -6,9 +6,11 @@ export class Home extends Component {
   render () {
     return (
       <div>
-        <h1>Hello, world!</h1>
-        <p>Welcome to your new single-page application, built with:</p>
-        <ul>
+        <h1>Welcome to the HelpDesk Support Ticketing Web Application</h1>
+            <p>Please excuse the construction as I, Carlos Castillo am currently the only one building this web application.</p>
+            <p>I have great hopes on this project and expect this HelpDesk to be awesome.</p>
+            <ul>
+                <li>Some helpful links below.  I'll probably move these to a different page in the future.</li>
           <li><a href='https://get.asp.net/'>ASP.NET Core</a> and <a href='https://msdn.microsoft.com/en-us/library/67ef8sbd.aspx'>C#</a> for cross-platform server-side code</li>
           <li><a href='https://facebook.github.io/react/'>React</a> for client-side code</li>
           <li><a href='http://getbootstrap.com/'>Bootstrap</a> for layout and styling</li>
