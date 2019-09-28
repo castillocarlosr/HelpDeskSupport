@@ -38,7 +38,19 @@ When I've completed the above user stories, I will update my README.md with the 
 
 ---
 ### My software developer interpretation on user stories
+* Goal for all tasks is to keep things simple and get an MVP (minimum viable product).
 - [ ] `User Story: As a User, I can log in and out of the system.`<br/>
-Create a login and logout with username and password using C# security.  Simple enough.....until I code it and find a bug.  
+- Create a login and logout with username and password using C# security.  Simple enough.....until I code it and find a bug. 
+1. Create a database to hold HelpDesk User login names and password.
+2. Set restrictions for user to access only their own tickets.
+3. Same database for HelpDesk User or "admin" with login name and password.
+4. Set restrictions or all-access to every ticket in the system.
+- [ ] `User Story: As a Helpdesk User, I can create a support ticket.`<br/>
+- [ ] `User Story: As a Helpdesk User, I can update my support tickets.`<br/>
+- [ ] `User Story: As a Helpdesk User, I can view all of my support tickets.`<br/>
+- [ ] `User Story: As a Helpdesk Team Member, I can view all support tickets.`<br/>
+1. Same database for "admin" to be able to access all tickets created.  Should be already created in user story 1.
+- [ ] `User Story: As a Helpdesk Team Member, I can update any support ticket.`<br/>
+- [ ] `User Story: As a Helpdesk Team Member, I can delete any support ticket.`<br/>
 
 
