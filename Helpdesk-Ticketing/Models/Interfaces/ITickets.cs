@@ -7,6 +7,6 @@ namespace Helpdesk_Ticketing.Models.Interfaces
 {
     public interface ITickets
     {
-        Task UpdateTicket()
+        //Task UpdateTicket()
     }
 }
