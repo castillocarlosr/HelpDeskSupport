@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Helpdesk_Ticketing.Models
 {
-    public class IdentityMemberUser : IdentityUser
+    public class AccountUsers : IdentityUser
     {
         /// <summary>
         /// Just Login needed here.

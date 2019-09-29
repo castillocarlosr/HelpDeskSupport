@@ -9,9 +9,11 @@ export class LoginView extends Component {
     }
 
 //Fill in somtheing here....
+    //I have an idea.  Save working controllers and models at this point
+    // then finish js after dinner
 
     render() {
-
+        <p>fdsafasd</p>
 
         return (
             <div>
@@ -20,11 +22,5 @@ export class LoginView extends Component {
                 {contents}
             </div>
         );
-    }
-
-    async populateWeatherData() {
-        const response = await fetch('weatherforecast');
-        const data = await response.json();
-        this.setState({ forecasts: data, loading: false });
     }
 }
