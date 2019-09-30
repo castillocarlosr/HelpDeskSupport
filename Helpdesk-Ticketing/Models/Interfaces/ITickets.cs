@@ -8,16 +8,20 @@ namespace Helpdesk_Ticketing.Models.Interfaces
 {
     public interface ITickets
     {
-        Task<Cart> UpdateCartTickets(int id, string username);
+        // Add item to the cart
+        Task AddCartTicket(CartTickets CartItem);
+        //Read one Item
+        Task<TicketTypes> GetTicketsByID(int id);
 
-        /// <summary>
-        /// Delete option only for Admin
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        Task<Cart> DeleteTicket(int id);
+        Task<Cart> GetCart(string username);
 
-        Task<bool> DeleteCartTickets(string username);
-        Task<Cart> GetCartForUser(string username);
+        //Read all items
+        Task<List<TicketTypes>> GetInventories();
+
+        //Update
+        Task UpdateInventory(TicketTypes ticketTypes);
+
+        //Delete
+        Task DeleteInventory(int id);
     }
 }

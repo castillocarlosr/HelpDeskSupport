@@ -1,7 +1,12 @@
+using Helpdesk_Ticketing.Data;
+using Helpdesk_Ticketing.Models;
+using Helpdesk_Ticketing.Models.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -12,7 +17,10 @@ namespace Helpdesk_Ticketing
     {
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+            //Configuration = configuration;
+            var builder = new ConfigurationBuilder().AddEnvironmentVariables();
+            builder.AddUserSecrets<Startup>();
+            Configuration = builder.Build();
         }
 
         public IConfiguration Configuration { get; }
@@ -21,6 +29,30 @@ namespace Helpdesk_Ticketing
         public void ConfigureServices(IServiceCollection services)
         {
 
+            services.AddMvc();
+            services.AddIdentity<AccountUsers, IdentityRole>()
+                   .AddEntityFrameworkStores<MembersDbContext>()
+                   .AddDefaultTokenProviders();
+            /*Local Strings*/
+            services.AddDbContext<MembersDbContext>(options =>
+            options.UseSqlServer(Configuration["ConnectionStrings:LocalUserConnection"]));
+            services.AddDbContext<TicketsDbContext>(options =>
+            options.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"]));
+
+            /*Deployment Strings*/
+            //services.AddDbContext<MembersDbContext>(options =>
+            //options.UseSqlServer(Configuration["ConnectionStrings:IdentityDefaultConnection"]));
+            //services.AddDbContext<TicketsDbContext>(options =>
+            //options.UseSqlServer(Configuration["ConnectionStrings:ProductionConnection"]));
+
+            services.AddScoped<ICart, CartService>();
+            services.AddScoped<ITickets, TicketService>();
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("AdminOnly", policy => policy.RequireRole(ApplicationRoles.MemberAdmin));
+            });
+            //********************************
             services.AddControllersWithViews();
 
             // In production, the React files will be served from this directory
