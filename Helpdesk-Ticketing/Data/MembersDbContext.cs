@@ -12,5 +12,7 @@ namespace Helpdesk_Ticketing.Data
         {
 
         }
+
+        public object Roles { get; internal set; }
     }
 }
