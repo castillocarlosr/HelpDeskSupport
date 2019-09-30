@@ -13,8 +13,6 @@ namespace Helpdesk_Ticketing.Controllers
 {
     public class AccountController : Controller
     {
-        //private UserManager<ApplicationUser> _userManager;
-        //private SignInManager<ApplicationUser> _signInManager;
         //use sendgrid if email sender is needed.
         
         private UserManager<AccountUsers> _userManager;
