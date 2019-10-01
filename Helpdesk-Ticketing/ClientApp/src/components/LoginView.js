@@ -20,7 +20,7 @@ export class LoginView extends Component {
 
                 
                 {LoginView}
-                <form method="post">
+                <form action='' method="post">
                     <div class="form-group">
                         <label asp-for="Email" class="form-group">Login email: </label>
                         <input class="form-group" asp-for="Email" placeholder="  user@helpdesk.com"/>

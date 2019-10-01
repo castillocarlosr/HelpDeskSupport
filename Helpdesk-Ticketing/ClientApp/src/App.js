@@ -5,6 +5,7 @@ import { Home } from './components/Home';
 import { FetchData } from './components/FetchData';
 import { Counter } from './components/Counter';
 import { LoginView } from './components/LoginView';
+import { Register } from './components/Register';
 
 import './custom.css'
 

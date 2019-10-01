@@ -11,17 +11,17 @@ namespace Helpdesk_Ticketing.Models.Interfaces
         // Add item to the cart
         Task AddCartTicket(CartTickets CartItem);
         //Read one Item
-        Task<TicketTypes> GetTicketsByID(int id);
+        Task<TicketTypes> GetTicketTypeByID(int id);
 
         Task<Cart> GetCart(string username);
 
         //Read all items
-        Task<List<TicketTypes>> GetInventories();
+        Task<List<TicketTypes>> GetTicketTypes();
 
         //Update
-        Task UpdateInventory(TicketTypes ticketTypes);
+        Task UpdateTicketTypes(TicketTypes ticketTypes);
 
         //Delete
-        Task DeleteInventory(int id);
+        Task DeleteTicketTypes(int id);
     }
 }
