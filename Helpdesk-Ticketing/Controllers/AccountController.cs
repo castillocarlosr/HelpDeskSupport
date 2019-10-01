@@ -10,6 +10,8 @@ using System.Text;
 
 namespace Helpdesk_Ticketing.Controllers
 {
+    [ApiController]
+    [Route("[controller]")]
     public class AccountController : Controller
     {
         //use sendgrid if email sender is needed.
