@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Helpdesk_Ticketing.Models;
@@ -8,21 +6,23 @@ using Helpdesk_Ticketing.Models.Interfaces;
 using Helpdesk_Ticketing.Models.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Text;
 
 namespace Helpdesk_Ticketing.Controllers
 {
     public class AccountController : Controller
     {
         //use sendgrid if email sender is needed.
-        
+
         private UserManager<AccountUsers> _userManager;
         private SignInManager<AccountUsers> _signInManager;
-        private readonly ITickets _context;
+        private readonly ICart _context;
 
-        public AccountController(UserManager<AccountUsers> userManager, SignInManager<AccountUsers> signInManager)
+        public AccountController(ICart context, UserManager<AccountUsers> userManager, SignInManager<AccountUsers> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _context = context;
         }
 
         [HttpGet]

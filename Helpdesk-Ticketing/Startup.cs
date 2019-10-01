@@ -1,6 +1,7 @@
 using Helpdesk_Ticketing.Data;
 using Helpdesk_Ticketing.Models;
 using Helpdesk_Ticketing.Models.Interfaces;
+using Helpdesk_Ticketing.Models.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -19,7 +20,7 @@ namespace Helpdesk_Ticketing
         {
             //Configuration = configuration;
             var builder = new ConfigurationBuilder().AddEnvironmentVariables();
-            builder.AddUserSecrets<Startup>();
+            //builder.AddUserSecrets<Startup>();
             Configuration = builder.Build();
         }
 
@@ -31,10 +32,10 @@ namespace Helpdesk_Ticketing
 
             services.AddMvc();
             services.AddIdentity<AccountUsers, IdentityRole>()
-                   .AddEntityFrameworkStores<MembersDbContext>()
+                   //.AddEntityFrameworkStores<ApplicationDbContext>()
                    .AddDefaultTokenProviders();
             /*Local Strings*/
-            services.AddDbContext<MembersDbContext>(options =>
+            services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlServer(Configuration["ConnectionStrings:LocalUserConnection"]));
             services.AddDbContext<TicketsDbContext>(options =>
             options.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"]));
@@ -45,8 +46,10 @@ namespace Helpdesk_Ticketing
             //services.AddDbContext<TicketsDbContext>(options =>
             //options.UseSqlServer(Configuration["ConnectionStrings:ProductionConnection"]));
 
-            services.AddScoped<ICart, CartService>();
-            services.AddScoped<ITickets, TicketService>();
+
+            //Not sure why it cant be used as a type parameter
+            //services.AddScoped<ICart, CartServices>();
+            //services.AddScoped<ITickets, TicketTypesServices>();
 
             services.AddAuthorization(options =>
             {
