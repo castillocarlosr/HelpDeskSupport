@@ -10,7 +10,7 @@ namespace Helpdesk_Ticketing.Models.Interfaces
     {
         Task<Cart> UpdateCartTickets(int id, string username);
 
-        Task<CartTickets> DeleteItem(int id);
+        Task<CartTickets> DeleteTicket(int id);
 
         Task<bool> DeleteCartTickets(string username);
 
