@@ -58,7 +58,7 @@ export class LoginView extends Component {
 
                 <p>-------------------------------</p>
 
-                <form onSubmit={this.handleSubmit}>
+                <form onSubmit={this.handleSubmit} action='AdminOnly'>
                     <div className={'form-group mx-sm-3 mb-2' + (submitted && !username ? ' has-error' : '')}>
                         <label asp-for="username" htmlFor="username" class="form-group">Login email: </label>
                         <input class="form-group" asp-for="username" placeholder="  user@helpdesk.com" />
