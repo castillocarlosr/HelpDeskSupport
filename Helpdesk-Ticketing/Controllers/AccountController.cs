@@ -7,9 +7,11 @@ using Helpdesk_Ticketing.Models.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Text;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Helpdesk_Ticketing.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("[controller]")]
     public class AccountController : Controller
@@ -70,7 +72,8 @@ namespace Helpdesk_Ticketing.Controllers
         [HttpGet]
         public IActionResult Login() => View();
 
-        [HttpPost]
+        [AllowAnonymous]
+        [HttpPost("authenticate")]
         public async Task<IActionResult> Login(LoginUser lvm)
         {
             if (ModelState.IsValid)
