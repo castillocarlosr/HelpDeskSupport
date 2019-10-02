@@ -10,6 +10,7 @@ export class Home extends Component {
             <p>Please excuse the construction as I, Carlos Castillo am currently the only one building this web application.</p>
             <p>I have great hopes on this project and expect this HelpDesk to be awesome.</p>
             <h2>Big LOGIN button here or on Nav bar</h2>
+            <hr />
             <br />
             <br />
             <br />
