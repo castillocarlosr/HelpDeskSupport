@@ -25,7 +25,7 @@ export class Registration extends Component {
                     </tr>
                 </thead>
                 <tbody>
-                    {register.map(forecast =>
+                    {register.map(register =>
                         <tr key={register.id}>
                             <td>{register.id}</td>
                             <td>{register.name}</td>

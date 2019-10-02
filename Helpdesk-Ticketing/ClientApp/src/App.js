@@ -5,6 +5,7 @@ import { Home } from './components/Home';
 import { Counter } from './components/Counter';
 import { LoginView } from './components/LoginView';
 import { Registration } from './components/Registration';
+
 import './custom.css'
 
 export default class App extends Component {
