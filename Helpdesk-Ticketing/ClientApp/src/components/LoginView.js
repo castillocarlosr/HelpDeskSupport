@@ -8,15 +8,17 @@ export class LoginView extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { login: [], username: '', password: '', submitted: true };
+        this.state = { login: [{ LoginName: "LoginName", PassWord: "PassWord"}] };
         //this.state = { email: "", password: "" };
+        //use map in render
+        //{this.state.login.map(login => key = { login.username });}
     }
 
     componentDidMount() {
         this.UserData();
     }
 
-    static renderUsers(username) {
+    static renderUsers(login) {
 
         return (
             <table className='table table-striped' aria-labelledby="tabelLabel">
@@ -29,7 +31,7 @@ export class LoginView extends Component {
                     </tr>
                 </thead>
                 <tbody>
-                    {username.map(login =>
+                    {login.map(login =>
                         <tr key={login.id}>
                             <td>{login.id}</td>
                             <td>{login.name}</td>
@@ -55,6 +57,7 @@ export class LoginView extends Component {
                 <p>Seeded data.  Use test users below</p>
                 <p>test1@test.com    password1</p>
                 <p>test2@test.com    password2</p>
+                <p>admin@helpdeskteammember.com    password3</p>
 
                 <p>-------------------------------</p>
 
@@ -76,6 +79,7 @@ export class LoginView extends Component {
                     </div>
                     <button type="submit" className="btn btn-primary"> Login </button>
                     {logginIn}
+                    
                 </form>
                 <h6>Welcome: {this.UserData}</h6>
                 {contents}

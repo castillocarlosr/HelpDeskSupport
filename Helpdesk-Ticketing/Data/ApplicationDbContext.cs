@@ -30,6 +30,12 @@ namespace Helpdesk_Ticketing.Data
                     ID = 2,
                     UserName = "test2@test.com",
                     PassWord = "password2"
+                },
+                new AccountUsers
+                {
+                    ID = 3,
+                    UserName = "admin@helpdeskteammember.com",
+                    PassWord = "password3"
                 }
                 );
         }

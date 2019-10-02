@@ -22,32 +22,32 @@ namespace Helpdesk_Ticketing.Data
                 new TicketTypes
                 {
                     ID = 1,
-                    Name = "Problem 1",
+                    NameTicket = "Problem 1",
                     //Importance = Priority.Low,
                     Comments = "details:  "
                 },
                 new TicketTypes
                 {
                     ID = 2,
-                    Name = "Problem 2",
+                    NameTicket = "Problem 2",
                     Comments = "details:  "
                 },
                 new TicketTypes
                 {
                     ID = 3,
-                    Name = "Problem 3",
+                    NameTicket = "Problem 3",
                     Comments = "details:  "
                 },
                 new TicketTypes
                 {
                     ID = 4,
-                    Name = "Problem 4",
+                    NameTicket = "Problem 4",
                     Comments = "details:  "
                 },
                 new TicketTypes
                 {
                     ID = 5,
-                    Name = "Problem 5",
+                    NameTicket = "Problem 5",
                     Comments = "details:  "
                 }
                 );
