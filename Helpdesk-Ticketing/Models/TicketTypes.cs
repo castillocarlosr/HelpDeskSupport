@@ -10,7 +10,7 @@ namespace Helpdesk_Ticketing.Models
     {
         public int ID { get; set;}
 
-        public string Name { get; set; }
+        public string NameTicket { get; set; }
         /*  I would of liked to show an enum drop down option but VS wont recognize yet.
         public enum Priority
         {

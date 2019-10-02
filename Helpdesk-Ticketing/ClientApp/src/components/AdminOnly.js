@@ -5,7 +5,7 @@ export class AdminOnly extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { login: [], username: '', password: '', submitted: true };
+        this.state = { tickets: [{ NameTicket: "NameTicket", Comments: "Comments"}]};
         //this.state = { email: "", password: "" };
     }
 
@@ -43,19 +43,15 @@ export class AdminOnly extends Component {
         return (
             <div>
                 <h1>Admin to see all tickets</h1>
-                <thead>
-                    <tr>
-                        <th>
+                <div className="col-4">
+                    <div className="card product-card">
+                        <div className="card-body">
+                            <h4 className="card-title">Some Tickets</h4>
+                            <p className="card-text">Ticket description</p>
                             {contents}
-                        </th>
-                        <th>
-                            {login}
-                        </th>
-                        <th>
-                            {username.toString()}
-                        </th>
-                    </tr>
-                </thead>
+                        </div>
+                    </div>
+                </div>
             </div>
         );
     }
