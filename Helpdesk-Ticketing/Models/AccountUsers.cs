@@ -11,7 +11,11 @@ namespace Helpdesk_Ticketing.Models
         /// <summary>
         /// Just Login needed here.
         /// </summary>
+        /// 
+        public int ID { get; set; }
         public string LoginName { get; set; }
+
+        public string PassWord { get; set; }
     }
 
     /// <summary>
