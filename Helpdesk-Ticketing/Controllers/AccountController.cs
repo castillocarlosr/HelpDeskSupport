@@ -11,15 +11,11 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Helpdesk_Ticketing.Controllers
 {
-    [Authorize]
-    [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]/[action]")]
     public class AccountController : Controller
     {
-        //use sendgrid if email sender is needed.
-
-        private UserManager<AccountUsers> _userManager;
-        private SignInManager<AccountUsers> _signInManager;
+        private readonly UserManager<AccountUsers> _userManager;
+        private readonly SignInManager<AccountUsers> _signInManager;
         private readonly ICart _context;
 
         public AccountController(ICart context, UserManager<AccountUsers> userManager, SignInManager<AccountUsers> signInManager)
