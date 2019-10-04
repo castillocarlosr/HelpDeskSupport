@@ -8,17 +8,20 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Text;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.Configuration;
 
 namespace Helpdesk_Ticketing.Controllers
 {
     [Route("api/[controller]/[action]")]
-    public class AccountController : Controller
+    public class UserController : Controller
     {
         private readonly UserManager<AccountUsers> _userManager;
         private readonly SignInManager<AccountUsers> _signInManager;
+        private readonly IConfiguration configuration;
+        private readonly IUserService service;
         private readonly ICart _context;
 
-        public AccountController(ICart context, UserManager<AccountUsers> userManager, SignInManager<AccountUsers> signInManager)
+        public UserController(ICart context, UserManager<AccountUsers> userManager, SignInManager<AccountUsers> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Helpdesk_Ticketing.Models.ViewModels;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,8 @@ namespace Helpdesk_Ticketing.Models
         public string LoginName { get; set; }
 
         public string PassWord { get; set; }
+
+        public IEnumerable<Cart> Carts { get; set; } = new List<Cart>();
     }
 
     /// <summary>
