@@ -20,5 +20,9 @@ namespace Helpdesk_Ticketing.Models
 
         public Cart Cart { get; set; }
         public TicketTypes TicketTypes { get; set; }
+
+        public string AccountUsersID { get; set; }
+
+        public AccountUsers AccountUsers { get; set; }
     }
 }

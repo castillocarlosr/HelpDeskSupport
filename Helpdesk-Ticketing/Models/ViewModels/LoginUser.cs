@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 namespace Helpdesk_Ticketing.Models.ViewModels
 {
     public class LoginUser
-    {
+    {   
         /// <summary>
-        /// Not sure if the login would be an email yet or not.
+        /// Not sure if the login would be an email yet or not.  For now, seperate.
         /// </summary>
         [Required]
         [DataType(DataType.EmailAddress)]
@@ -19,7 +19,9 @@ namespace Helpdesk_Ticketing.Models.ViewModels
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
+        /*
         [Display(Name ="Remember me")]
         public bool RememberMe { get; set; }
+        */
     }
 }
