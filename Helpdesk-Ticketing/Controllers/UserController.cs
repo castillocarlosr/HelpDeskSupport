@@ -9,6 +9,10 @@ using Microsoft.AspNetCore.Mvc;
 using System.Text;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Configuration;
+using System.IdentityModel.Tokens.Jwt;
+using System;
+using Microsoft.IdentityModel.Tokens;
+using System.Linq;
 
 namespace Helpdesk_Ticketing.Controllers
 {
@@ -17,33 +21,39 @@ namespace Helpdesk_Ticketing.Controllers
     {
         private readonly UserManager<AccountUsers> _userManager;
         private readonly SignInManager<AccountUsers> _signInManager;
-        private readonly IConfiguration configuration;
-        private readonly IUserService service;
+        private readonly IConfiguration _configuration;
+        private readonly IUserService _service;
         private readonly ICart _context;
 
-        public UserController(ICart context, UserManager<AccountUsers> userManager, SignInManager<AccountUsers> signInManager)
+        public UserController(ICart context, IUserService service, IConfiguration configuration, UserManager<AccountUsers> userManager, SignInManager<AccountUsers> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _configuration = configuration;
+            _service = service;
             _context = context;
         }
 
+        /// <summary>
+        /// Should get all users
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
-        public IActionResult Register() => View();
+        public IEnumerable<UserViewModel> All() => _service.All();
 
         /// <summary>
         /// rvm = register-view-model
         /// </summary>
         /// <param name="rvm"></param>
-        /// <returns></returns>
+        /// <returns>POST Register User</returns>
         [HttpPost]
-        public async Task<IActionResult> Register(RegisterUser rvm)
+        public async Task<IActionResult> Register([FromBody]RegisterUser rvm)
         {
             if (ModelState.IsValid)
             {
                 AccountUsers user = new AccountUsers()
                 {
-                    UserName = rvm.Email,
+                    //UserName = rvm.Email,
                     Email = rvm.Email
                 };
 
@@ -62,18 +72,25 @@ namespace Helpdesk_Ticketing.Controllers
                     {
                         await _userManager.AddToRoleAsync(user, ApplicationRoles.MemberAdmin);
                     }
-                    return RedirectToAction("Home", "ClientApp");
+                    _service.Add(user);
+                    //return RedirectToAction("Home", "ClientApp");
+                    return Ok(GenerateJwtToken(rvm.Email, user));
                 }
             }
             return View(rvm);
         }
 
-        [HttpGet]
-        public IActionResult Login() => View();
+        //[HttpGet]
+        //public IActionResult Login() => View();
 
+        /// <summary>
+        /// POST Login User
+        /// </summary>
+        /// <param name="lvm">lvm = login-view-model</param>
+        /// <returns></returns>
         [AllowAnonymous]
         [HttpPost("authenticate")]
-        public async Task<IActionResult> Login(LoginUser lvm)
+        public async Task<IActionResult> Login([FromBody]LoginUser lvm)
         {
             if (ModelState.IsValid)
             {
@@ -81,24 +98,57 @@ namespace Helpdesk_Ticketing.Controllers
 
                 if (result.Succeeded)
                 {
-                    var user = await _userManager.FindByEmailAsync(lvm.Email);
-                    if (await _userManager.IsInRoleAsync(user, ApplicationRoles.MemberAdmin))
+                    //var appUser = await _userManager.FindByEmailAsync(lvm.Email);
+                    var appUser = _userManager.Users.SingleOrDefault(u => u.Email == lvm.Email);
+                    if (await _userManager.IsInRoleAsync(appUser, ApplicationRoles.MemberAdmin))
                     {
                         var ourUser = await _userManager.FindByEmailAsync(lvm.Email);
                         return RedirectToPage("/Admin/Index");
 
                     }
-                    return RedirectToAction("Home", "ClientApp");
+                    //return RedirectToAction("Home", "ClientApp");
+                    return Ok(GenerateJwtToken(lvm.Email, appUser));
                 }
             }
             ModelState.TryAddModelError(string.Empty, "Invalid Login Attempt");
             return View(lvm);
         }
 
+        [HttpPost]
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
-            return RedirectToAction("Home", "ClientApp");
+            return Ok();
+        }
+
+        /// <summary>
+        /// TRrying JWT security claims for React.
+        /// </summary>
+        /// <param name="email"></param>
+        /// <param name="user"></param>
+        /// <returns></returns>
+        private object GenerateJwtToken(string email, IdentityUser user)
+        {
+            var claims = new List<Claim>
+            {
+                new Claim(JwtRegisteredClaimNames.Sub, email),
+                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                new Claim(ClaimTypes.NameIdentifier, user.Id)
+            };
+
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JwtKey"]));
+            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+            var expires = DateTime.Now.AddDays(Convert.ToDouble(_configuration["JwtExpireDays"]));
+
+            var token = new JwtSecurityToken(
+                _configuration["JwtIssuer"],
+                _configuration["JwtIssuer"],
+                claims,
+                expires: expires,
+                signingCredentials: creds
+            );
+
+            return new JwtSecurityTokenHandler().WriteToken(token);
         }
     }
 }

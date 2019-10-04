@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Helpdesk_Ticketing.Models.Interfaces
 {
-    interface IUserService
+    public interface IUserService
     {
         IEnumerable<UserViewModel> All();
         void Add(AccountUsers accountUsers);
