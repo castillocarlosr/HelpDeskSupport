@@ -1,5 +1,6 @@
 ﻿import React, { Component } from 'react';
-//import { LoginView } from './../../../Models/ViewModels';
+import { setAccessToken, setUser, isLoggedIn } from './helpers';
+
 
 
 
@@ -8,48 +9,69 @@ export class LoginView extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { login: [{ LoginName: "LoginName", PassWord: "PassWord"}] };
+        this.state = { login: '', password: '', loggedIn: isLoggedIn() };
         //this.state = { email: "", password: "" };
         //use map in render
         //{this.state.login.map(login => key = { login.username });}
     }
 
-    componentDidMount() {
-        this.UserData();
+
+
+    handleOnChange(event) {
+        this.setState({ [event.target.id]: event.target.value, errors: [] });
     }
 
-    static renderUsers(login) {
-
-        return (
-            <table className='table table-striped' aria-labelledby="tabelLabel">
-                <thead>
-                    <tr>
-                        <th>UserLogin</th>
-                        <th>ID</th>
-                        <th>Ticket-Name</th>
-                        <th>Comments</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {login.map(login =>
-                        <tr key={login.id}>
-                            <td>{login.id}</td>
-                            <td>{login.name}</td>
-                            <td>{login.comments}</td>
-                        </tr>
-                    )}
-                </tbody>
-            </table>
-        );
+    prepareFormData(data = this.state) {
+        return {
+            UserName: data.userName.trim(),
+            Password: data.password.trim()
+        };
     }
+
+    loginUser(event) {
+
+        var data = JSON.stringify(this.prepareFormData());
+
+        // Send POST request with data submited from form
+        fetch('/api/users/login', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json, application/xml, text/plain, text/html, *.*',
+                'Content-Type': 'application/json; charset=UTF-8'
+            },
+            body: data
+        })
+            .then(this.checkStatus);
+    }
+
+    checkStatus(res) {
+        if (res.status >= 200 && res.status < 300) {
+            setAccessToken(res.access_token);
+            setUser(this.state.userName);
+            this.setState({ loggedIn: true });
+            this.props.history.push('/User1');
+        } else {
+            let error = new Error(res.statusTest);
+            console.log(error);
+            this.props.history.push('/Counter');
+        }
+    }
+
+
+
 
     render() {
-        let contents = this.state.loading ? <p><em>Loading Users....</em></p> : LoginView.renderUsers(this.state.login);
-        let { logginIn } = this.props;
-        let { username, password, submitted } = this.state;
+        if (this.state.loggedIn) {
+            window.location.replace("/");
+            return true;
+        }
+        //let contents = this.state.loading ? <p><em>Loading Users....</em></p> : LoginView.renderUsers(this.state.login);
+        //let { logginIn } = this.props;
+        //let { username, password, submitted } = this.state;
 
         return (
 
+ 
             <div class="">
                 <h1 id="tabelLabel" >HelpDesk Login</h1>
                 <h2>Email and password please.....</h2>
@@ -61,37 +83,32 @@ export class LoginView extends Component {
 
                 <p>-------------------------------</p>
 
-                <form onSubmit={this.handleSubmit} action='AdminOnly'>
-                    <div className={'form-group mx-sm-3 mb-2' + (submitted && !username ? ' has-error' : '')}>
-                        <label asp-for="username" htmlFor="username" class="form-group">Login email: </label>
-                        <input class="form-group" asp-for="username" placeholder="  user@helpdesk.com" />
+
+                <form onSubmit={this.loginUser} action='AdminOnly'>
+                    <div className={'form-group mx-sm-3 mb-2'}>
+                        <label asp-for="userName" htmlFor="userName" class="form-group">Login email: </label>
+                        <input class="form-group" asp-for="userName" placeholder="  user@helpdesk.com"  />
                         <h5 asp-validation-for="Email"></h5>
-                        {submitted && !username &&
-                            <div className="help-block">Username is required</div>
+                        {
+                            <div className="help-block">UserName is required</div>
                         }
                     </div>
-                    <div className={'form-group mx-sm-3 mb-2' + (submitted && !password ? ' has-error' : '')}>
+                    <div className={'form-group mx-sm-3 mb-2'}>
                         <label asp-for="password" htmlFor="password" class="form-group">Password: </label>
                         <input class="form-group" asp-for="password" type="password" placeholder="  123PassWord" />
-                        {submitted && !password &&
+                        {
                             <div className="help-block">Password is required</div>
                         }
                     </div>
-                    <button type="submit" className="btn btn-primary"> Login </button>
-                    {logginIn}
-                    
+                    <button type="submit" className="btn btn-primary" onChange={this.handleOnChange}> Login </button>
+
+
                 </form>
                 <h6>Welcome: {this.UserData}</h6>
-                {contents}
+      
             </div>
 
         );
-    }
-    async UserData() {
-        //that is probably not right route...
-        const response = await fetch('https://localhost:44361/Models/Accountusers');
-        const data = await response.json();
-        this.setState({ login: data, loading: true });
     }
 }
 
