@@ -11,6 +11,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.AspNetCore.Http;
+
 
 namespace Helpdesk_Ticketing
 {
@@ -46,8 +48,6 @@ namespace Helpdesk_Ticketing
             //services.AddDbContext<TicketsDbContext>(options =>
             //options.UseSqlServer(Configuration["ConnectionStrings:ProductionConnection"]));
 
-
-            //Not sure why it cant be used as a type parameter
             //services.AddScoped<ICart, CartServices>();
             //services.AddScoped<ITickets, TicketTypesServices>();
 
