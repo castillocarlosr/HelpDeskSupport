@@ -85,7 +85,7 @@ export class LoginView extends Component {
                 <p>-------------------------------</p>
 
 
-                <form onSubmit={this.loginUser} action='Counter'>
+                <form onSubmit={this.loginUser} action='tickets-view'>
                     <div className={'form-group mx-sm-3 mb-2'}>
                         <label asp-for="userName" htmlFor="userName" class="form-group">Login email: </label>
                         <input class="form-group" asp-for="userName" placeholder="  user@helpdesk.com"  />

@@ -4,10 +4,11 @@ import { Layout } from './components/Layout';
 import { Home } from './components/Home';
 import { Counter } from './components/Counter';
 import { LoginView } from './components/LoginView';
-import { Registration } from './components/Registration';
+import { RegistrationView } from './components/RegistrationView';
+import { TicketsView } from './components/TicketsView';
 
 import './custom.css'
-import TicketsView from './components/TicketsView';
+
 
 export default class App extends Component {
   static displayName = App.name;
@@ -20,7 +21,7 @@ export default class App extends Component {
 
             <Route path='/login-view' component={LoginView} />
 
-            <Route path='/register' component={Registration} />
+            <Route path='/registration-view' component={RegistrationView} />
 
             <Route path='/tickets-view' component={TicketsView} />
       </Layout>

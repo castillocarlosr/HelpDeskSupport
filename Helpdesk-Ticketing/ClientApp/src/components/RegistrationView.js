@@ -5,12 +5,12 @@ import { setAccessToken, setUser, isLoggedIn } from './helpers';
 
 
 
-export class Registration extends Component {
-    static displayName = Registration.name;
+export class RegistrationView extends Component {
+    static displayName = RegistrationView.name;
 
     constructor(props) {
         super(props);
-        this.state = { login: '', password: '', loggedIn: isLoggedIn() };
+        this.state = { login: '', password: '', confirmpassword: '', loggedIn: isLoggedIn() };
         //this.state = { email: "", password: "" };
         //use map in render
         //{this.state.login.map(login => key = { login.username });}
@@ -25,16 +25,17 @@ export class Registration extends Component {
     prepareFormData(data = this.state) {
         return {
             UserName: data.userName.trim(),
-            Password: data.password.trim()
+            Password: data.password.trim(),
+            ConfirmPassword: data.confirmpassword.trim()
         };
     }
 
-    loginUser(event) {
+    registerUser(event) {
 
         var data = JSON.stringify(this.prepareFormData());
 
         // Send POST request with data submited from form
-        fetch('Models/AccountUsers', {
+        fetch('Models/ViewModels/UserViewModel', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json, application/xml, text/plain, text/html, *.*',
@@ -72,9 +73,9 @@ export class Registration extends Component {
 
         return (
 
-
+ 
             <div class="">
-                <h1 id="tabelLabel" >HelpDesk Registration</h1>
+                <h1 id="tabelLabel" >HelpDesk Login</h1>
                 <h2>Email and password please.....</h2>
                 <p>-------------------------------</p>
                 <p>Seeded data.  Use test users below</p>
@@ -85,10 +86,10 @@ export class Registration extends Component {
                 <p>-------------------------------</p>
 
 
-                <form onSubmit={this.loginUser} action='Counter'>
+                <form onSubmit={this.registerUser} action='tickets-view'>
                     <div className={'form-group mx-sm-3 mb-2'}>
                         <label asp-for="userName" htmlFor="userName" class="form-group">Login email: </label>
-                        <input class="form-group" asp-for="userName" placeholder="  user@helpdesk.com" />
+                        <input class="form-group" asp-for="userName" placeholder="  user@helpdesk.com"  />
                         <h5 asp-validation-for="Email"></h5>
                         {
                             <div className="help-block">UserName is required</div>
@@ -101,12 +102,19 @@ export class Registration extends Component {
                             <div className="help-block">Password is required</div>
                         }
                     </div>
-                    <button type="submit" className="btn btn-primary" onChange={this.handleOnChange}> Login </button>
+                    <div className={'form-group mx-sm-3 mb-2'}>
+                        <label asp-for="confirmpassword" htmlFor="confirmpassword" class="form-group">Confirm Password: </label>
+                        <input class="form-group" asp-for="confirmpassword" type="password" placeholder="  123PassWord" />
+                        {
+                            <div className="help-block">Confirmation Password is required</div>
+                        }
+                    </div>
+                    <button type="submit" className="btn btn-primary" onChange={this.handleOnChange}> Resigster </button>
 
 
                 </form>
                 <h6>Welcome: {this.UserData}</h6>
-
+      
             </div>
 
         );
