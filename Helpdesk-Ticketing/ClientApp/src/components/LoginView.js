@@ -1,4 +1,5 @@
 ﻿import React, { Component } from 'react';
+
 import { setAccessToken, setUser, isLoggedIn } from './helpers';
 
 
@@ -33,7 +34,7 @@ export class LoginView extends Component {
         var data = JSON.stringify(this.prepareFormData());
 
         // Send POST request with data submited from form
-        fetch('/api/users/login', {
+        fetch('Models/ViewModels/UserViewModel', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json, application/xml, text/plain, text/html, *.*',
@@ -84,7 +85,7 @@ export class LoginView extends Component {
                 <p>-------------------------------</p>
 
 
-                <form onSubmit={this.loginUser} action='AdminOnly'>
+                <form onSubmit={this.loginUser} action='Counter'>
                     <div className={'form-group mx-sm-3 mb-2'}>
                         <label asp-for="userName" htmlFor="userName" class="form-group">Login email: </label>
                         <input class="form-group" asp-for="userName" placeholder="  user@helpdesk.com"  />
