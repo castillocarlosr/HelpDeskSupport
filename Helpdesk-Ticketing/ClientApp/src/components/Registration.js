@@ -1,80 +1,117 @@
 ﻿import React, { Component } from 'react';
 
+import { setAccessToken, setUser, isLoggedIn } from './helpers';
+
+
+
+
 export class Registration extends Component {
     static displayName = Registration.name;
 
     constructor(props) {
         super(props);
-        this.state = { register: [], loading: true };
+        this.state = { login: '', password: '', loggedIn: isLoggedIn() };
+        //this.state = { email: "", password: "" };
+        //use map in render
+        //{this.state.login.map(login => key = { login.username });}
     }
 
-    componentDidMount() {
-        this.UserData();
+
+
+    handleOnChange(event) {
+        this.setState({ [event.target.id]: event.target.value, errors: [] });
     }
 
-    static renderUsers(register) {
-        return (
-            <table className='table table-striped' aria-labelledby="tabelLabel">
-                <thead>
-                    <tr>
-                        <th>User:</th>
-                        <th>Ticket</th>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Comments</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {register.map(register =>
-                        <tr key={register.id}>
-                            <td>{register.id}</td>
-                            <td>{register.name}</td>
-                            <td>{register.password}</td>
-                            <td>{register.confirmpassword}</td>
-                        </tr>
-                    )}
-                </tbody>
-            </table>
-        );
+    prepareFormData(data = this.state) {
+        return {
+            UserName: data.userName.trim(),
+            Password: data.password.trim()
+        };
     }
+
+    loginUser(event) {
+
+        var data = JSON.stringify(this.prepareFormData());
+
+        // Send POST request with data submited from form
+        fetch('Models/AccountUsers', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json, application/xml, text/plain, text/html, *.*',
+                'Content-Type': 'application/json; charset=UTF-8'
+            },
+            body: data
+        })
+            .then(this.checkStatus);
+    }
+
+    checkStatus(res) {
+        if (res.status >= 200 && res.status < 300) {
+            setAccessToken(res.access_token);
+            setUser(this.state.userName);
+            this.setState({ loggedIn: true });
+            this.props.history.push('/User1');
+        } else {
+            let error = new Error(res.statusTest);
+            console.log(error);
+            this.props.history.push('/Counter');
+        }
+    }
+
+
+
 
     render() {
-        let contents = this.state.loading ? <p><em>Wating to register user....</em></p> : Registration.renderUsers(this.state.register);
+        if (this.state.loggedIn) {
+            window.location.replace("/");
+            return true;
+        }
+        //let contents = this.state.loading ? <p><em>Loading Users....</em></p> : LoginView.renderUsers(this.state.login);
+        //let { logginIn } = this.props;
+        //let { username, password, submitted } = this.state;
 
         return (
+
 
             <div class="">
                 <h1 id="tabelLabel" >HelpDesk Registration</h1>
-                <h2>Email, password, and confrim password please.....</h2>
+                <h2>Email and password please.....</h2>
+                <p>-------------------------------</p>
+                <p>Seeded data.  Use test users below</p>
+                <p>test1@test.com    password1</p>
+                <p>test2@test.com    password2</p>
+                <p>admin@helpdeskteammember.com    password3</p>
+
                 <p>-------------------------------</p>
 
-                {contents}
 
-                <p>-------------------------------</p>
-                <form action='/Counter.js' method="post">
-                    <div class="form-group">
-                        <label asp-for="Email" class="form-group">Login email: </label>
-                        <input class="form-group" asp-for="Email" placeholder="  user@helpdesk.com" />
+                <form onSubmit={this.loginUser} action='Counter'>
+                    <div className={'form-group mx-sm-3 mb-2'}>
+                        <label asp-for="userName" htmlFor="userName" class="form-group">Login email: </label>
+                        <input class="form-group" asp-for="userName" placeholder="  user@helpdesk.com" />
                         <h5 asp-validation-for="Email"></h5>
+                        {
+                            <div className="help-block">UserName is required</div>
+                        }
                     </div>
-                    <div class="form-group mx-sm-3 mb-2">
-                        <label asp-for="Password" class="form-group">Password: </label>
-                        <input class="form-group" asp-for="Password" type="password" placeholder="  123PassWord" />
+                    <div className={'form-group mx-sm-3 mb-2'}>
+                        <label asp-for="password" htmlFor="password" class="form-group">Password: </label>
+                        <input class="form-group" asp-for="password" type="password" placeholder="  123PassWord" />
+                        {
+                            <div className="help-block">Password is required</div>
+                        }
                     </div>
-                    <div class="form-group mx-sm-3 mb-2">
-                        <label asp-for="ConfirmPassword" class="form-group">Confirm Password: </label>
-                        <input class="form-group" asp-for="ConfirmPassword" type="password" placeholder="  123PassWord" />
-                    </div>
-                    <button type="submit" className="btn btn-primary"> REgister </button>
+                    <button type="submit" className="btn btn-primary" onChange={this.handleOnChange}> Login </button>
+
+
                 </form>
+                <h6>Welcome: {this.UserData}</h6>
+
             </div>
+
         );
     }
-    async UserData() {
-        //that is probably not right route...
-        const response = await fetch('../../../Controllers/AccountController');
-        const data = await response.json();
-        this.setState({ register: data, loading: false });
-    }
-
 }
+
+
+
