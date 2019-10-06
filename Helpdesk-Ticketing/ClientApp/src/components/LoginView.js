@@ -38,7 +38,7 @@ export class LoginView extends Component {
         var data = JSON.stringify(this.prepareFormData());
 
         // Send POST request with data submited from form
-        fetch('Models/ViewModels/UserViewModel', {
+        fetch('api/users/login', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json, application/xml, text/plain, text/html, *.*',
@@ -91,21 +91,21 @@ export class LoginView extends Component {
 
                 <form onSubmit={this.loginUser} action='tickets-view'>
                     <div className={'form-group mx-sm-3 mb-2'}>
-                        <label asp-for="userName" htmlFor="userName" class="form-group">Login email: </label>
-                        <input class="form-group" asp-for="userName" placeholder="  user@helpdesk.com"  />
+                        <label asp-for="userName" htmlFor="userName" class="form-group" >Login email: </label>
+                        <input class="form-group" asp-for="userName" onChange={this.handleOnChange} placeholder="  user@helpdesk.com"  />
                         <h5 asp-validation-for="Email"></h5>
                         {
                             <div className="help-block">UserName is required</div>
                         }
                     </div>
                     <div className={'form-group mx-sm-3 mb-2'}>
-                        <label asp-for="password" htmlFor="password" class="form-group">Password: </label>
-                        <input class="form-group" asp-for="password" type="password" placeholder="  123PassWord" />
+                        <label asp-for="password" htmlFor="password" class="form-group" >Password: </label>
+                        <input class="form-group" asp-for="password" type="password" onChange={this.handleOnChange} placeholder="  123PassWord" />
                         {
                             <div className="help-block">Password is required</div>
                         }
                     </div>
-                    <button type="submit" className="btn btn-primary" onChange={this.handleOnChange}> Login </button>
+                    <button type="submit" className="btn btn-primary"> Login </button>
 
 
                 </form>

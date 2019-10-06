@@ -16,7 +16,7 @@ using System.Linq;
 
 namespace Helpdesk_Ticketing.Controllers
 {
-    [Route("api/[controller]/[action]")]
+    [Route("[action]")]
     public class UserController : Controller
     {
         private readonly UserManager<AccountUsers> _userManager;
@@ -88,8 +88,7 @@ namespace Helpdesk_Ticketing.Controllers
         /// </summary>
         /// <param name="lvm">lvm = login-view-model</param>
         /// <returns></returns>
-        [AllowAnonymous]
-        [HttpPost("authenticate")]
+        [HttpPost]
         public async Task<IActionResult> Login([FromBody]LoginUser lvm)
         {
             if (ModelState.IsValid)
