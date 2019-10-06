@@ -14,6 +14,10 @@ export class LoginView extends Component {
         //this.state = { email: "", password: "" };
         //use map in render
         //{this.state.login.map(login => key = { login.username });}
+        this.handleOnChange = this.handleOnChange.bind(this);
+        this.prepareFormData = this.prepareFormData.bind(this);
+        this.loginUser = this.loginUser.bind(this);
+        this.checkStatus = this.checkStatus.bind(this);
     }
 
 

@@ -11,9 +11,7 @@ export class RegistrationView extends Component {
     constructor(props) {
         super(props);
         this.state = { login: '', password: '', confirmpassword: '', loggedIn: isLoggedIn() };
-        //this.state = { email: "", password: "" };
-        //use map in render
-        //{this.state.login.map(login => key = { login.username });}
+        
     }
 
 
