@@ -11,7 +11,10 @@ export class RegistrationView extends Component {
     constructor(props) {
         super(props);
         this.state = { login: '', password: '', confirmpassword: '', loggedIn: isLoggedIn() };
-        
+        this.handleOnChange = this.handleOnChange.bind(this);
+        this.prepareFormData = this.prepareFormData.bind(this);
+        this.registerUser = this.registerUser.bind(this);
+        this.checkStatus = this.checkStatus.bind(this);
     }
 
 
@@ -33,7 +36,7 @@ export class RegistrationView extends Component {
         var data = JSON.stringify(this.prepareFormData());
 
         // Send POST request with data submited from form
-        fetch('Models/ViewModels/UserViewModel', {
+        fetch('Register', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json, application/xml, text/plain, text/html, *.*',
@@ -95,19 +98,19 @@ export class RegistrationView extends Component {
                     </div>
                     <div className={'form-group mx-sm-3 mb-2'}>
                         <label asp-for="password" htmlFor="password" class="form-group">Password: </label>
-                        <input class="form-group" asp-for="password" type="password" placeholder="  123PassWord" />
+                        <input class="form-group" asp-for="password" type="password" onChange={this.handleOnChange} placeholder="  123PassWord" />
                         {
                             <div className="help-block">Password is required</div>
                         }
                     </div>
                     <div className={'form-group mx-sm-3 mb-2'}>
                         <label asp-for="confirmpassword" htmlFor="confirmpassword" class="form-group">Confirm Password: </label>
-                        <input class="form-group" asp-for="confirmpassword" type="password" placeholder="  123PassWord" />
+                        <input class="form-group" asp-for="confirmpassword" type="password" onChange={this.handleOnChange} placeholder="  123PassWord" />
                         {
                             <div className="help-block">Confirmation Password is required</div>
                         }
                     </div>
-                    <button type="submit" className="btn btn-primary" onChange={this.handleOnChange}> Resigster </button>
+                    <button type="submit" className="btn btn-primary" > Resigster </button>
 
 
                 </form>

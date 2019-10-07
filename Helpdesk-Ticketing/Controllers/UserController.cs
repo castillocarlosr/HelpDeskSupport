@@ -17,6 +17,7 @@ using System.Linq;
 namespace Helpdesk_Ticketing.Controllers
 {
     [Route("api/[controller]/[action]")]
+    [ApiController]
     public class UserController : Controller
     {
         private readonly UserManager<AccountUsers> _userManager;
@@ -74,10 +75,12 @@ namespace Helpdesk_Ticketing.Controllers
                     }
                     _service.Add(user);
                     //return RedirectToAction("Home", "ClientApp");
-                    return Ok(GenerateJwtToken(rvm.Email, user));
+                    //return Ok(GenerateJwtToken(rvm.Email, user));
+                    return Json(GenerateJwtToken(rvm.Email, user));
                 }
             }
-            return View(rvm);
+            //return View(rvm);
+            return Json(View(rvm));
         }
 
         //[HttpGet]
@@ -88,8 +91,7 @@ namespace Helpdesk_Ticketing.Controllers
         /// </summary>
         /// <param name="lvm">lvm = login-view-model</param>
         /// <returns></returns>
-        [AllowAnonymous]
-        [HttpPost("authenticate")]
+        [HttpPost]
         public async Task<IActionResult> Login([FromBody]LoginUser lvm)
         {
             if (ModelState.IsValid)
