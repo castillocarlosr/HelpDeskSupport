@@ -42,7 +42,7 @@ export class TicketsView extends Component {
         }
 
         let contents = this.state.loading
-            ? <p><em>Loading...</em></p>
+            ? <p><em>Please choose a Help Ticket Below</em></p>
             : TicketsView.renderTicketsTable(this.state.ticketTypes);
 
 
@@ -60,7 +60,7 @@ export class TicketsView extends Component {
     }
 
     async populateTicketData() {
-        const response = await fetch('Models/tickettypes');
+        const response = await fetch('Models/CartTickets');
         const data = await response.json();
         this.setState({ ticketTypes: data, loading: false });
     }

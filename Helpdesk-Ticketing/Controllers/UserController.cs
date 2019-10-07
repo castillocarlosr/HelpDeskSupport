@@ -16,7 +16,8 @@ using System.Linq;
 
 namespace Helpdesk_Ticketing.Controllers
 {
-    [Route("[action]")]
+    [Route("api/[controller]/[action]")]
+    [ApiController]
     public class UserController : Controller
     {
         private readonly UserManager<AccountUsers> _userManager;
@@ -74,10 +75,12 @@ namespace Helpdesk_Ticketing.Controllers
                     }
                     _service.Add(user);
                     //return RedirectToAction("Home", "ClientApp");
-                    return Ok(GenerateJwtToken(rvm.Email, user));
+                    //return Ok(GenerateJwtToken(rvm.Email, user));
+                    return Json(GenerateJwtToken(rvm.Email, user));
                 }
             }
-            return View(rvm);
+            //return View(rvm);
+            return Json(View(rvm));
         }
 
         //[HttpGet]
