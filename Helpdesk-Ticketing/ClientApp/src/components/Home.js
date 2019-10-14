@@ -17,9 +17,6 @@ export class Home extends Component {
             <br />
             <br />
             <br />
-            <br />
-            <br />
-            <br />
             <hr />
         <ul>
           <li>Some helpful links below.  I'll probably move these to a different page in the future.</li>

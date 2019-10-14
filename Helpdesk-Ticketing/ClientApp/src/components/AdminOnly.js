@@ -17,7 +17,7 @@ export class AdminOnly extends Component {
                     <tr>
                         <th>UserLogin</th>
                         <th>ID</th>
-                        <th>Ticket-Name</th>
+                        <th>Ticket-Name:</th>
                         <th>Comments</th>
                     </tr>
                 </thead>
