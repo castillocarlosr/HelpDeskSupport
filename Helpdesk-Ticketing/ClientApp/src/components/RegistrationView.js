@@ -10,17 +10,27 @@ export class RegistrationView extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { login: '', password: '', confirmpassword: '', loggedIn: isLoggedIn() };
+        this.state = { newRegister: '', newPassword: '', newConfirmPassword: '', loggedIn: false };
         this.handleOnChange = this.handleOnChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this); //added oct 14
         this.prepareFormData = this.prepareFormData.bind(this);
         this.registerUser = this.registerUser.bind(this);
         this.checkStatus = this.checkStatus.bind(this);
     }
 
-
-
+    /*
     handleOnChange(event) {
         this.setState({ [event.target.id]: event.target.value, errors: [] });
+    }
+    */
+
+    handleOnChange(event) {
+        const target = event.target;
+        const name = target.name;
+    }
+
+    handleSubmit(event) {
+        alert('You have registered:  ' + this.state.newRegister);
     }
 
     prepareFormData(data = this.state) {
@@ -87,10 +97,10 @@ export class RegistrationView extends Component {
                 <p>-------------------------------</p>
 
 
-                <form onSubmit={this.registerUser} action='tickets-view'>
+                <form onSubmit={this.handleSubmit} action='tickets-view'>
                     <div className={'form-group mx-sm-3 mb-2'}>
                         <label asp-for="userName" htmlFor="userName" class="form-group">Login email: </label>
-                        <input class="form-group" asp-for="userName" placeholder="  user@helpdesk.com"  />
+                        <input name="newRegister" value={this.state.newRegister} type="text" newRegister={this.state.newRegister} onChange={this.handleOnChange} class="form-group" placeholder="  user@helpdesk.com" />
                         <h5 asp-validation-for="Email"></h5>
                         {
                             <div className="help-block">UserName is required</div>
@@ -98,14 +108,14 @@ export class RegistrationView extends Component {
                     </div>
                     <div className={'form-group mx-sm-3 mb-2'}>
                         <label asp-for="password" htmlFor="password" class="form-group">Password: </label>
-                        <input class="form-group" asp-for="password" type="password" onChange={this.handleOnChange} placeholder="  123PassWord" />
+                        <input name="newPassword" value={this.state.newPassword} class="form-group" type="password" onChange={this.handleOnChange} placeholder="  123PassWord" />
                         {
                             <div className="help-block">Password is required</div>
                         }
                     </div>
                     <div className={'form-group mx-sm-3 mb-2'}>
                         <label asp-for="confirmpassword" htmlFor="confirmpassword" class="form-group">Confirm Password: </label>
-                        <input class="form-group" asp-for="confirmpassword" type="password" onChange={this.handleOnChange} placeholder="  123PassWord" />
+                        <input name="newConfirmPassword" value={this.state.newConfirmPassword} class="form-group" type="password" onChange={this.handleOnChange} placeholder="  123PassWord" />
                         {
                             <div className="help-block">Confirmation Password is required</div>
                         }
@@ -115,6 +125,11 @@ export class RegistrationView extends Component {
 
                 </form>
                 <h6>Welcome: {this.UserData}</h6>
+                <select>
+                    <option>Feeling AWESOME!</option>
+                    <option>Feeling Good.</option>
+                    <option>Feeling ordinary.</option>
+                </select>
       
             </div>
 
