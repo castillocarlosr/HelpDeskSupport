@@ -87,7 +87,13 @@ export class LoginView extends Component {
                 <p>admin@helpdeskteammember.com    password3</p>
 
                 <p>-------------------------------</p>
-
+                <select>
+                    <option>Help Desk USER.</option>
+                    <option>Help Desk ADMIN only.</option>
+                    <option>The Matrix.</option>
+                </select>
+                < br />
+                < br />
 
                 <form onSubmit={this.loginUser} action='tickets-view'>
                     <div className={'form-group mx-sm-3 mb-2'}>
