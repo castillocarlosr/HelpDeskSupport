@@ -1,15 +1,24 @@
 ﻿import React, { Component } from 'react';
+import { setAccessToken, setUser, isLoggedIn } from './helpers';
+import { Link, withRouter } from 'react-router-dom';
+
 
 export class TicketsView extends Component {
     static displayName = TicketsView.name;
 
     constructor(props) {
         super(props);
-        this.state = { ticketTypes: [], loading: true};
+        this.state = { ticketTypes: [], loading: true, isLoggedIn: true };
     }
 
     componentDidMount() {
         this.populateTicketData();
+    }
+
+    logout(event) {
+        event.preventDefault()
+        localStorage.removeItem('usertoken')
+        this.props.history.push('/')
     }
 
     static renderTicketsTable(ticketTypes) {
@@ -55,6 +64,9 @@ export class TicketsView extends Component {
                 <h2 id="tabelLabel" >TICKETS</h2>
                 <p>This better work.</p>
                 {contents}
+                <div>
+                   The user is <b>{isLoggedIn ? 'currently' : 'not'}</b> logged in.
+                </div>
             </div>
         );
     }
