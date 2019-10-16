@@ -78,6 +78,7 @@ export class LoginView extends Component {
             window.location.replace("/");
             return true;
         }
+        const isLoggedIn = this.state.loggedIn;
         //let contents = this.state.loading ? <p><em>Loading Users....</em></p> : LoginView.renderUsers(this.state.login);
         //let { logginIn } = this.props;
         //let { username, password, submitted } = this.state;
@@ -106,19 +107,20 @@ export class LoginView extends Component {
                 <form onSubmit={this.loginUser} action='tickets-view'>
                     <div className={'form-group mx-sm-3 mb-2'}>
                         <label asp-for="userName" htmlFor="userName" class="form-group" >Login email: </label>
-                        <input name="deskLogin" class="form-group" asp-for="userName" onChange={this.handleOnChange} placeholder="  user@helpdesk.com" />
-                        {
+                        <input name="deskLogin" class="form-group" asp-for="userName" onChange={this.handleOnChange} placeholder="  user@helpdesk.com" />            
                             <div className="help-block">UserName is required</div>
-                        }
                     </div>
                     <div className={'form-group mx-sm-3 mb-2'}>
                         <label asp-for="password" htmlFor="password" class="form-group" >Password: </label>
                         <input name="deskPassword" class="form-group" asp-for="password" type="password" onChange={this.handleOnChange} placeholder="  123PassWord" />
-                        {
-                            <div className="help-block">Password is required</div>
-                        }
+                            <p className="help-block">Password is required</p>
+                    </div>
+                    < br />
+                    <div>
+                        The user is <b>{isLoggedIn ? 'currently' : 'not'}</b> logged in.
                     </div>
                     <button type="submit" className="btn btn-primary"> Login </button>
+
 
 
                 </form>
