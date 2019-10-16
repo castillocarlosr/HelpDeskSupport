@@ -10,20 +10,28 @@ export class LoginView extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { login: '', password: '', loggedIn: isLoggedIn() };
-        //this.state = { email: "", password: "" };
-        //use map in render
-        //{this.state.login.map(login => key = { login.username });}
+        this.state = { deskLogin: '', deskPassword: '', loggedIn: false };
+        this.handleSubmit = this.handleSubmit(this);
         this.handleOnChange = this.handleOnChange.bind(this);
         this.prepareFormData = this.prepareFormData.bind(this);
         this.loginUser = this.loginUser.bind(this);
         this.checkStatus = this.checkStatus.bind(this);
     }
 
-
-
+    /*
     handleOnChange(event) {
         this.setState({ [event.target.id]: event.target.value, errors: [] });
+    }
+    */
+
+    handleOnChange(event) {
+        const target = event.target;
+        const userName = target.userName;
+        const userPassword = target.userPassword;
+    }
+
+    handleSubmit(event) {
+        alert('HelpDesk User: ' + this.state.newRegister + ' has signed in!  yay?');
     }
 
     prepareFormData(data = this.state) {
@@ -98,7 +106,7 @@ export class LoginView extends Component {
                 <form onSubmit={this.loginUser} action='tickets-view'>
                     <div className={'form-group mx-sm-3 mb-2'}>
                         <label asp-for="userName" htmlFor="userName" class="form-group" >Login email: </label>
-                        <input class="form-group" asp-for="userName" onChange={this.handleOnChange} placeholder="  user@helpdesk.com"  />
+                        <input name="deskLogin" value={this.state.deskLogin} class="form-group" asp-for="userName" onChange={this.handleOnChange} placeholder="  user@helpdesk.com" />
                         <h5 asp-validation-for="Email"></h5>
                         {
                             <div className="help-block">UserName is required</div>
@@ -106,7 +114,7 @@ export class LoginView extends Component {
                     </div>
                     <div className={'form-group mx-sm-3 mb-2'}>
                         <label asp-for="password" htmlFor="password" class="form-group" >Password: </label>
-                        <input class="form-group" asp-for="password" type="password" onChange={this.handleOnChange} placeholder="  123PassWord" />
+                        <input name="deskPassword" value={this.state.deskLogin} class="form-group" asp-for="password" type="password" onChange={this.handleOnChange} placeholder="  123PassWord" />
                         {
                             <div className="help-block">Password is required</div>
                         }
