@@ -24,13 +24,23 @@ export class RegistrationView extends Component {
     }
     */
 
-    handleOnChange(event) {
-        const target = event.target;
-        const name = target.name;
+    handleOnChange=(event)=>{
+        this.setState({
+            [event.target.name]: event.target.value
+        })
+        //const target = event.target;
+        //const name = target.name;
     }
 
     handleSubmit(event) {
-        alert('You have registered:  ' + this.state.newRegister);
+        event.preventDefault();
+        const { newPassword, newConfirmPassword } = this.state;
+        if (newPassword !== newConfirmPassword) {
+            alert("Passwords do NOT match");
+        }
+        else {
+            alert('You have registered:  ' + this.state.newRegister);
+        }
     }
 
     prepareFormData(data = this.state) {
@@ -86,8 +96,8 @@ export class RegistrationView extends Component {
 
  
             <div class="">
-                <h1 id="tabelLabel" >HelpDesk Login</h1>
-                <h2>Email and password please.....</h2>
+                <h1 id="tabelLabel" >HelpDesk REGISTRATION</h1>
+                <h2>Email, password, and password confirmation please.....</h2>
                 <p>-------------------------------</p>
                 <p>Seeded data.  Use test users below</p>
                 <p>test1@test.com    password1</p>
@@ -97,25 +107,25 @@ export class RegistrationView extends Component {
                 <p>-------------------------------</p>
 
 
-                <form onSubmit={this.handleSubmit} action='tickets-view'>
+                <form onSubmit={this.registerUser} action='tickets-view'>
                     <div className={'form-group mx-sm-3 mb-2'}>
-                        <label asp-for="userName" htmlFor="userName" class="form-group">Login email: </label>
-                        <input name="newRegister" value={this.state.newRegister} type="text" newRegister={this.state.newRegister} onChange={this.handleOnChange} class="form-group" placeholder="  user@helpdesk.com" />
+                        <label htmlFor="userName" class="form-group">Login email: </label>
+                        <input name="newRegister" type="text" onChange={this.handleOnChange} class="form-group" placeholder=" user email" />
                         <h5 asp-validation-for="Email"></h5>
                         {
                             <div className="help-block">UserName is required</div>
                         }
                     </div>
                     <div className={'form-group mx-sm-3 mb-2'}>
-                        <label asp-for="password" htmlFor="password" class="form-group">Password: </label>
-                        <input name="newPassword" value={this.state.newPassword} class="form-group" type="password" onChange={this.handleOnChange} placeholder="  123PassWord" />
+                        <label htmlFor="password" class="form-group">Password: </label>
+                        <input name="newPassword" class="form-group" type="password" onChange={this.handleOnChange} placeholder="  Password" />
                         {
                             <div className="help-block">Password is required</div>
                         }
                     </div>
                     <div className={'form-group mx-sm-3 mb-2'}>
-                        <label asp-for="confirmpassword" htmlFor="confirmpassword" class="form-group">Confirm Password: </label>
-                        <input name="newConfirmPassword" value={this.state.newConfirmPassword} class="form-group" type="password" onChange={this.handleOnChange} placeholder="  123PassWord" />
+                        <label htmlFor="confirmpassword" class="form-group">Confirm Password: </label>
+                        <input name="newConfirmPassword" class="form-group" type="password" onChange={this.handleOnChange} placeholder="  Password Confirm" />
                         {
                             <div className="help-block">Confirmation Password is required</div>
                         }
@@ -124,12 +134,6 @@ export class RegistrationView extends Component {
 
 
                 </form>
-                <h6>Welcome: {this.UserData}</h6>
-                <select>
-                    <option>Feeling AWESOME!</option>
-                    <option>Feeling Good.</option>
-                    <option>Feeling ordinary.</option>
-                </select>
       
             </div>
 
