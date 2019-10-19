@@ -1,6 +1,7 @@
 ﻿import React, { Component } from 'react';
-
+import axios from 'axios';
 import { setAccessToken, setUser, isLoggedIn } from './helpers';
+
 
 
 
@@ -10,7 +11,7 @@ export class RegistrationView extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { newRegister: '', newPassword: '', newConfirmPassword: '', loggedIn: false };
+        this.state = { newRegister: [], newPassword: '', newConfirmPassword: '', loggedIn: false };
         this.handleOnChange = this.handleOnChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this); //added oct 14
         this.prepareFormData = this.prepareFormData.bind(this);
@@ -80,7 +81,13 @@ export class RegistrationView extends Component {
         }
     }
 
-
+    componentDidMount() {
+        axios.get('https://jsonplaceholder.typicode.com/users')
+            .then(res => {
+                const newRegister = res.data;
+                this.setState({ newRegister });
+            })
+    }
 
 
     render() {
@@ -103,6 +110,9 @@ export class RegistrationView extends Component {
                 <p>test1@test.com    password1</p>
                 <p>test2@test.com    password2</p>
                 <p>admin@helpdeskteammember.com    password3</p>
+                <ul>
+                    {this.state.newRegister.map(registrants => <li>{registrants.name}</li>)}
+                </ul>
 
                 <p>-------------------------------</p>
 
