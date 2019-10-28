@@ -80,7 +80,7 @@ export class RegistrationView extends Component {
             this.props.history.push('/Counter');
         }
     }
-
+    /*  test for recieving json from external site.  It works.
     componentDidMount() {
         axios.get('https://jsonplaceholder.typicode.com/users')
             .then(res => {
@@ -88,7 +88,7 @@ export class RegistrationView extends Component {
                 this.setState({ newRegister });
             })
     }
-
+    */
 
     render() {
         if (this.state.loggedIn) {
@@ -110,9 +110,7 @@ export class RegistrationView extends Component {
                 <p>test1@test.com    password1</p>
                 <p>test2@test.com    password2</p>
                 <p>admin@helpdeskteammember.com    password3</p>
-                <ul>
-                    {this.state.newRegister.map(registrants => <li>{registrants.name}</li>)}
-                </ul>
+                
 
                 <p>-------------------------------</p>
 
