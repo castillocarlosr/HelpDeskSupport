@@ -1,5 +1,5 @@
 ﻿import React, { Component } from 'react';
-import { setAccessToken, setUser, isLoggedIn } from './helpers';
+import { setAccessToken, setUser, isLoggedIn, getUser } from './helpers';
 import { Link, withRouter } from 'react-router-dom';
 
 
@@ -65,7 +65,7 @@ export class TicketsView extends Component {
                 <p>This better work.</p>
                 {contents}
                 <div>
-                   The user is <b>{isLoggedIn ? 'currently' : 'not'}</b> logged in.
+                    The user {getUser.toString()} is <b>{isLoggedIn ? 'currently' : 'not'}</b> logged in.
                 </div>
             </div>
         );
