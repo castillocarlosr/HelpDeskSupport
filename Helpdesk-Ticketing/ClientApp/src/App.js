@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router';
+//import authService from './api-authorization/AuthorizeService'
 import { Layout } from './components/Layout';
 import { Home } from './components/Home';
 import { Counter } from './components/Counter';
@@ -15,8 +16,10 @@ export default class App extends Component {
 
   render () {
     return (
-      <Layout>
-        <Route exact path='/' component={Home} />
+        <Layout>
+
+            <Route exact path='/' component={Home} />
+
             <Route path='/counter' component={Counter} />
 
             <Route path='/login-view' component={LoginView} />
@@ -24,6 +27,7 @@ export default class App extends Component {
             <Route path='/registration-view' component={RegistrationView} />
 
             <Route path='/tickets-view' component={TicketsView} />
+            
       </Layout>
     );
   }
