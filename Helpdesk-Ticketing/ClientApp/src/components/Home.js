@@ -1,7 +1,29 @@
 import React, { Component } from 'react';
 
 export class Home extends Component {
-  static displayName = Home.name;
+    static displayName = Home.name;
+
+    constructor(props) {
+        super(props);
+        this.UserGreeting(props) {
+            return <h1>Welcome back!</h1>;
+        };
+
+        this.GuestGreeting(props) {
+            return <h1>Please sign up.</h1>;
+        };
+
+        this.Greeting(props) {
+            const isLoggedIn = props.isLoggedIn;
+            if (isLoggedIn) {
+                return <UserGreeting />;
+            }
+            return <GuestGreeting />;
+        };
+    }
+
+    
+
 
   render () {
     return (
@@ -13,6 +35,8 @@ export class Home extends Component {
             <hr />
             <br />
             <br />
+            <Greeting isLoggedIn={false} />,
+                document.getElementById('root')
             <br />
             <br />
             <br />
