@@ -15,8 +15,6 @@ export class Home extends Component {
             <hr />
             <br />
             <br />
-            <Greeting isLoggedIn={false} />,
-                document.getElementById('root')
             <br />
             <br />
             <br />
