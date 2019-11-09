@@ -5,6 +5,10 @@
 ## Intro
 <p>  This project is asked for by a company to demonstrate by ability to write source code, documentation, and explain fundamentals of my solution. </p>
 
+## Updates
+* This project will not be as rushed as the original company that asked for this project cancelled.  Will still continue to work on it to practice React+C# Azure combo.< /br>
+November 08, 2019
+
 ## How to use
 ```
 In order to run your local machine, clone the respository on to your machine.  Using Visual Studio 2019, click the "play button" ISS Express.  If using Mac, there will simply be a play button.
