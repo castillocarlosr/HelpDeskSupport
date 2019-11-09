@@ -16,22 +16,6 @@ export class LoginView extends Component {
         this.prepareFormData = this.prepareFormData.bind(this);
         this.loginUser = this.loginUser.bind(this);
         this.checkStatus = this.checkStatus.bind(this);
-
-        this.UserGreeting(props) {
-            return <h1>Welcome back!</h1>;
-        };
-
-        this.GuestGreeting(props) {
-            return <h1>Please sign up.</h1>;
-        };
-
-        this.Greeting(props) {
-            const isLoggedIn = props.isLoggedIn;
-            if (isLoggedIn) {
-                return <UserGreeting />;
-            }
-            return <GuestGreeting />;
-        };
     }
 
     /*
