@@ -6,7 +6,19 @@ export class Home extends Component {
   render () {
     return (
       <div>
-        <h1>Hello, world!</h1>
+        <h1>Hello there!</h1>
+        <h1>Welcome to the HelpDesk Support Ticketing Web Application</h1>
+            <p>Please excuse the construction as I, Carlos Castillo am currently the only one building this web application.</p>
+            <p>I have great hopes on this project and expect this HelpDesk to be awesome.</p>
+            <p>Last update November 19, 2019</p>
+            <hr />
+            <br />
+            <br />
+            <br />
+            <br />
+
+            <h6>Below are some reference documents for now.</h6>
+            
         <p>Welcome to your new single-page application, built with:</p>
         <ul>
           <li><a href='https://get.asp.net/'>ASP.NET Core</a> and <a href='https://msdn.microsoft.com/en-us/library/67ef8sbd.aspx'>C#</a> for cross-platform server-side code</li>
