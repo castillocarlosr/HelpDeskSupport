@@ -1,5 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using WithAuth.Models;
 
 namespace WithAuth.Controllers
 {
@@ -9,16 +13,16 @@ namespace WithAuth.Controllers
     {
         private static readonly TicketTypes[] ticketTypes = new TicketTypes[]
         {
-            new TicketTypes{ ID = 1, NameTicket = "Ticket ONE", Comments = "I need help description"},
-            new TicketTypes{ ID = 2, NameTicket = "Ticket TWO", Comments = "2nd description"},
-            new TicketTypes{ ID = 3, NameTicket = "Ticket THREE", Comments = "The force is strong with this one."},
-            new TicketTypes{ ID = 4, NameTicket = "Ticket FOUR", Comments = "Make it so number one."},
-            new TicketTypes{ ID = 5, NameTicket = "Ticket FIVE", Comments = "To infinity, and beyond?"}
+            new TicketTypes{ ID = 1, Name = "Ticket ONE", Comments = "I need help description"},
+            new TicketTypes{ ID = 2, Name = "Ticket TWO", Comments = "2nd description"},
+            new TicketTypes{ ID = 3, Name = "Ticket THREE", Comments = "The force is strong with this one."},
+            new TicketTypes{ ID = 4, Name = "Ticket FOUR", Comments = "Make it so number one."},
+            new TicketTypes{ ID = 5, Name = "Ticket FIVE", Comments = "To infinity, and beyond?"}
         };
 
-        private readonly ILogger<ProductController> _logger;
+        private readonly ILogger<TicketContoller> _logger;
 
-        public ProductController(ILogger<ProductController> logger)
+        public TicketContoller(ILogger<TicketContoller> logger)
         {
             _logger = logger;
         }
