@@ -2,7 +2,7 @@
 
 namespace WithAuth.Models
 {
-    public class Inventory
+    public class TicketTypes
     {
         public int ID { get; set; }
 
@@ -16,6 +16,8 @@ namespace WithAuth.Models
             Medium,
             Hard
         }
+
+        public string Comments { get; set; }
     }
 }
 
