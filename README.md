@@ -7,7 +7,8 @@
 
 ## Updates
 * This project will not be as rushed as the original company that asked for this project cancelled.  Will still continue to work on it to practice React+C# Azure combo.< /br>
-November 08, 2019
+   - November 08, 2019
+   - January 27, 2020
 
 ## How to use
 ```
