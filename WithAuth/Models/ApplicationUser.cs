@@ -8,5 +8,6 @@ namespace WithAuth.Models
 {
     public class ApplicationUser : IdentityUser
     {
+        //Not sure ?
     }
 }
