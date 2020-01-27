@@ -10,7 +10,12 @@ export class Home extends Component {
         <h1>Welcome to the HelpDesk Support Ticketing Web Application</h1>
             <p>Please excuse the construction as I, Carlos Castillo am currently the only one building this web application.</p>
             <p>I have great hopes on this project and expect this HelpDesk to be awesome.</p>
-            <p>Last update December 10, 2019</p>
+            <strike>
+                <p>Last update December 10, 2019</p>
+            </strike>
+            <p>UPDATE:  might need to scrap this and rework on it again.  Dont want to lost the commits though.
+                </p>
+            <p>Last looked at Jan. 27, 2020</p>
             <p>WOW it's been a while since I worked on this app.</p>
             <hr />
             <br />
