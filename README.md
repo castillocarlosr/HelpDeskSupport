@@ -6,9 +6,10 @@
 <p>  This project is asked for by a company to demonstrate by ability to write source code, documentation, and explain fundamentals of my solution. </p>
 
 ## Updates
-* This project will not be as rushed as the original company that asked for this project cancelled.  Will still continue to work on it to practice React+C# Azure combo.< /br>
+* This project will not be as rushed as the original company that asked for this project cancelled.  Will still continue to work on it to practice React+C# Azure combo.
    - November 08, 2019
    - January 27, 2020
+   - June 24, 2020 (looking into removing security vunerabilites.  Nothing major as no personal information is ever asked or accessed).
 
 ## How to use
 ```
